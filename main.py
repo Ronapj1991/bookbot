@@ -1,3 +1,4 @@
+import sys
 from stats import count_words
 from stats import character_dict
 from stats import create_report
@@ -8,7 +9,11 @@ def get_book_text(filepath):
         return contents
 
 def main():
-    path = "books/frankenstein.txt"
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    
+    path = sys.argv[1]
     book = get_book_text(path)
     
     character_dictionary = character_dict(book)
@@ -30,5 +35,5 @@ def main():
                 line += f"{dictionary[key]}"
         print(line)
     print("============= END ===============")
-
+    
 main()
